@@ -1,0 +1,58 @@
+package net.javaguides.springboot.service;
+
+import net.javaguides.springboot.model.Candidate;
+import net.javaguides.springboot.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Override
+    public List<Candidate> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public void saveEmployee(Candidate employee) {
+        this.employeeRepository.save(employee);
+    }
+
+    @Override
+    public Candidate getEmployeeById(long id) {
+        Optional<Candidate> optional = employeeRepository.findById(id);
+        Candidate employee = null;
+        if (optional.isPresent()) {
+            employee = optional.get();
+        } else {
+            throw new RuntimeException(" Employee not found for id :: " + id);
+        }
+        return employee;
+    }
+
+    @Override
+    public void deleteEmployeeById(long id) {
+        this.employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Candidate> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.employeeRepository.findAll(pageable);
+    }
+
+
+}

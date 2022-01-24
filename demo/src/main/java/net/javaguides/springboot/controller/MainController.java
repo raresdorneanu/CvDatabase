@@ -1,0 +1,21 @@
+package net.javaguides.springboot.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MainController {
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+//    @GetMapping("/all_users")
+//    public String allUsers() {
+//        return "all_users";
+//    }
+    /*
+     * @GetMapping("/") public String home() { return "index"; }
+     */
+}

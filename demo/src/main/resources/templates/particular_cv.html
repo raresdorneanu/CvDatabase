@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Particular Cv</title>
+</head>
+<body>
+<tbody>
+<h1>test</h1>
+<tr th:each="cv : ${particular}">
+    <td th:text="${cv.firstName}"></td>
+    <td th:text="${cv.lastName}"></td>
+    <td th:text="${cv.email}"></td>
+    <td th:text="${cv.age}"></td>
+    <td th:text="${cv.education}"></td>
+    <td th:text="${cv.experience}"></td>
+
+</tr>
+</tbody>
+</body>
+</html>

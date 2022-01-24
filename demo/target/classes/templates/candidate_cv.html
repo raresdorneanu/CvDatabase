@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>candidate test page</h1>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>All Cvs</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .col {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .hero-row{
+            padding-top: 60px;
+        }
+
+        .navbar {
+            background-color: transparent;
+            border: none;
+        }
+
+        .navbar .container {
+            padding: 30px 0;
+        }
+
+        .navbar .navbar-brand {
+            color: #fff;
+            text-shadow: 8px 8px 14px #000;
+            font-size: 24px;
+        }
+
+        .navbar .navbar-brand:hover {
+            color: #fff;
+        }
+
+        .navbar .navbar-brand .cv {
+            font-size: 38px;
+        }
+
+        .container.hero {
+            background-image: linear-gradient(to bottom, rgba(67, 85, 229, 1), rgba(67, 85, 229, 0));
+            width: 100%;
+            padding-top: 100px;
+            padding-bottom: 200px;
+            position: absolute;
+            top: 0;
+        }
+
+        .container.hero .row {
+            margin: 0 auto;
+            width: 80%;
+
+        }
+
+        .hero-text {
+            padding-right: 100px;
+            padding-left: 20px;
+        }
+
+        .hero-text h1 {
+            color: white;
+            font-weight: bold;
+            font-size: 42px;
+            padding-bottom: 12px;
+        }
+
+        .hero-text p {
+            color: white;
+            font-size: 18px;
+        }
+
+        .col.right h1 {
+            color: white;
+            font-weight: bold;
+            font-size: 42px;
+            padding-bottom: 12px;
+        }
+
+        .container-right {
+            width: 80%;
+        }
+
+        .form-group label {
+            color: white !important;
+            font-size: 18px;
+        }
+        input[type="submit"] {
+            font-size: 18px;
+            transition: all 0.2s ease-out;
+            line-height: 20px;
+            background-color: #fa6267;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}"><strong class="cv">Cv</strong> Management System</a>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<div class="container hero">
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                    Employee First Name</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                    Employee Last Name</a>
+            </th>
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                    Employee Email</a>
+            </th>
+            <th> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cv : ${allCvs}">
+            <td th:text="${cv.firstName}"></td>
+            <td th:text="${cv.lastName}"></td>
+            <td th:text="${cv.email}"></td>
+            <td th:text="${cv.age}"></td>
+            <td th:text="${cv.education}"></td>
+            <td th:text="${cv.experience}"></td>
+            <td><a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
